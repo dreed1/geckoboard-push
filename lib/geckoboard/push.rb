@@ -93,5 +93,29 @@ module Geckoboard
       opts[:percentage] = "hide" if hide_percentage
       self.push(opts)
     end
+
+    # item should be a hash containing
+    # - label (string)
+    # - sublabel (string)
+    # - axis (hash) with
+      # - point (array) containing your axis labeling points
+    # - range (array) containing any number of hashes with
+      # - color (string)
+      # - start (numeric value)
+      # - end (numeric value)
+    # measure (hash) containing
+      # - current (hash) containing
+        # - start (numeric value)
+        # - end (numeric value)
+      # - projected (hash) containing
+        # - start (numeric value)
+        # - end (numeric value)
+      # - comparative (hash)
+        # - point (numeric value)
+    def bullet(item, orientation = 'horizontal')
+      opts = {}
+      opts[:orientation => orientation, :item => item]
+      self.push(opts)
+    end
   end
 end

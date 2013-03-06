@@ -65,6 +65,12 @@ class PushTest < Test::Unit::TestCase
     assert_equal true, @push.funnel([{:label => "Test1", :value => 5}, {:label => "Test2", :value => 10}], true, true)
   end
 
+  def test_bullet_graph
+    expect_http_request({"orientation" => "horizontal", "item" => { "label" => "test bullet graph", "sublabel" => "foo bar", "axis" => { "point" => ["0","50","100"] }, "range"=> [{"color" => "red", "start" => "0", "end" => "33"}, {"color" => "yellow", "start" => "34", "end" => "66"}, {"color" => "green", "start" => "67", "end" => "100"}], "measure" => {"current" => {"start" => "0", "end" => "50"}, "projected" => {"start" => "51", "end" => "100"}, "comparative" => {"point" => "68"}}}})
+    assert_equal true, @push.bullet_graph({:orientation => "horizontal", :item => { :label => "test bullet graph", :sublabel => "foo bar", :axis => { :point => [0,50,100] }, :range => [{:color => "red", :start => 0, :end => 33}, {:color => "yellow", :start => 34, :end => 66}, {:color => "green", :start => 67, :end => 100}], :measure => {:current => {:start => 0, :end => 50}, :projected => {:start => 51, :end => 100}, :comparative => {:point => 68}}}})
+    true.should == false
+  end
+
   def expect_http_request(json)
     response = Net::HTTPOK.new("1.1", 200, "OK")
     response.instance_variable_set(:@body, '{"success":true}')
