@@ -112,7 +112,7 @@ module Geckoboard
         # - end (numeric value)
       # - comparative (hash)
         # - point (numeric value)
-    def bullet(item, orientation = 'horizontal')
+    def bullet_graph(item, orientation = 'horizontal')
       opts = {}
       opts[:orientation => orientation, :item => item]
       self.push(opts)
